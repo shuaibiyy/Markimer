@@ -10,9 +10,31 @@
       - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
      -->
     <script src="markimer.js"></script>
+
+    <link rel="stylesheet" href="css/custom.css" />
+    <link rel="stylesheet" href="css/foundation.css" />
   </head>
   <body>
-    <div id="bookmarks"> 
+    <div>
+      <div>
+        <label for="bookmarks">Bookmarks</label>
+        <select id="bookmarks"></select>
+      </div>
+
+      <div>
+        <label class="expiryDate">Expiry Date: </label>
+        <input type="date" id="expiryDate">
+        <label class="expiryTime">Time: </label>
+        <input type="time" id="expiryTime">
+      </div>
+
+      <div>
+        <label class="triggerDate">Trigger Date: </label>
+        <input type="date" id="triggerDate">
+        <label class="triggerTime">Time: </label>
+        <input type="time" id="triggerTime">      
+      </div>
+    
     </div>
   </body>
 </html>
