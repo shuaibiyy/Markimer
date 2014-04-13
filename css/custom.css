@@ -5,3 +5,7 @@ body {
 label {
 	color: teal;
 }
+
+#content {
+	padding: 10px;
+}
