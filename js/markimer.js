@@ -1,8 +1,19 @@
 var markimer = angular.module('markimer', []);
 
-markimer.controller('MainController', function ($scope) {
+markimer.controller('MainController', function ($scope, $timeout) {
 
   $scope.bookmarks = [];
+
+  $scope.configuration = {
+    expiryDate: '',
+    expiryTime: '',
+    triggerDate: '',
+    triggerTime: ''
+  };
+
+  $timeout(function() {
+    $scope.getTree();
+  });
 
   $scope.setTimeToLive = function (bookmark) {};
 
@@ -20,7 +31,8 @@ markimer.controller('MainController', function ($scope) {
     parentNode.forEach(function(bookmark) {
       if (!(bookmark.title === undefined || bookmark.title === null)) {
         if (bookmark.url) {
-          $scope.bookmarks.push(bookmark.title);
+          $scope.bookmarks.push(bookmark);
+          console.log(bookmark.title);
         }
       }
       if (bookmark.children) {
@@ -29,14 +41,16 @@ markimer.controller('MainController', function ($scope) {
     });
   };
 
-  $scope.configuration = { expiryDate: '',
-                          expiryTime: '',
-                          triggerDate: '',
-                          triggerTime: ''
-                        };
-
   $scope.submit = function () {
     console.log("Submitted!");
+
+    if ($scope.selectedBookmarks) {
+      for (var i = 0; i < $scope.selectedBookmarks.length; i++) {
+        chrome.bookmarks.update($scope.selectedBookmarks[i].id, {title: "NYPL"}, function(){
+          console.log("Awesome! Woot! Woot!");
+        });
+      }
+    }
   };
 
 });

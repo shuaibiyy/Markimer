@@ -12,7 +12,7 @@
   },
 
   "background": {
-    "scripts": ["markimer.js"],
+    "scripts": ["js/markimer.js"],
     "persistent": false
   }
 }

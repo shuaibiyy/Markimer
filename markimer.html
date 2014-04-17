@@ -20,13 +20,19 @@
     <div id="content" ng-view ng-controller="MainController">
       <form ng-submit="submit()">
         <div>
-          <label for="bookmarks">Bookmarks</label>
-          <select id="bookmarks">
-            <option ng-repeat="bookmark in bookmarks">
-              <a href="bookmark.url">{{ bookmark.name }}</a>
-            </option>
-          </select>
+          <label for="bookmarksSearch">Search Bookmarks:</label>
+          <!-- <select ng-model="bookmarks" ng-options="bookmark.title for bookmark in bookmarks">
+          </select> -->
+          <input id="bookmarksSearch" ng-model="searchText">
+          <table id="searchTextResults" ng-show="searchText">
+            <tr><th>Bookmark Matches</th></tr>
+            <tr ng-repeat="bookmark in (selectedBookmarks = (bookmarks | filter:searchText))">
+              <td><a href="{{bookmark.url}}">{{bookmark.title}}</a></td>
+            </tr>
+          </table>
         </div>
+
+        <hr>
 
         <div>
           <label class="expiryDate">Expiry Date: </label>
@@ -40,7 +46,7 @@
           <label class="triggerDate">Trigger Date: </label>
           <input type="date" id="triggerDate" ng-model="configuration.triggerDate">
           <label class="triggerTime">Time: </label>
-          <input type="time" id="triggerTime" ng-model="configuration.triggerDate">
+          <input type="time" id="triggerTime" ng-model="configuration.triggerTime">
           <button type="submit" id="setTrigger" class="button tiny">Set Trigger</button>
         </div>
       </form>
